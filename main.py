@@ -1,26 +1,8 @@
-
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, html, dcc
 import pandas as pd
-
-
-def cleanData(df):
-    cols = ['Area Abbreviation', 'Area',
-            'Item Code', 'Item', 'latitude', 'longitude']
-    cols.extend(list(map(lambda y: int(y[1:]), df.columns[6:])))
-    df.columns = cols
-    df.rename(columns={'Area Abbreviation': 'CountryCode',
-              'Area': 'Country'}, inplace=True)
-    return df
-
-
-def readData(path):
-    data = pd.read_csv(path)
-    return cleanData(data)
-
-
-# foodData = readData('datasets/pre_food.csv')
+from plots import equipmentPlots
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
@@ -101,15 +83,15 @@ navbar = dbc.Navbar([
 card_img = dbc.Container([
     dbc.Card([
         dbc.CardImg(
-            src="/static/images/ooter.jpg",
+            src="/static/images/front pages.webp",
             top=True,
             style={"opacity": 0.2},
         ),
         dbc.CardImgOverlay(
             dbc.CardBody([
-                html.H4("Feed All", className="title"),
+                html.H4("Russia Ukraine War", className="title"),
                 html.P([
-                    "A Collective dashboard for food production"
+                    "A Collective  database for war"
                 ], className="card-text1"),
                 html.P([
                     "over the years"
@@ -124,14 +106,14 @@ home = html.Div([
         html.Div([
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/equpment.jpeg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            "Equipments Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
@@ -141,14 +123,14 @@ home = html.Div([
             ], className='shadow'),
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/personal.webp",
                     top=True,
                     style={"opacity": 0.3},
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            "Personnel Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
@@ -158,14 +140,14 @@ home = html.Div([
             ], className='shadow'),
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/timeline.jpg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            "Timeline Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
@@ -255,7 +237,8 @@ footer = html.Footer([
 
 app.layout = html.Div([
     navbar,
-    home
+    home,
+    equipmentPlots
     # html.Br(),
     # card_img,
     # cards,
