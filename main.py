@@ -2,24 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, html, dcc
 import pandas as pd
-
-
-def cleanData(df):
-    cols = ['Area Abbreviation', 'Area',
-            'Item Code', 'Item', 'latitude', 'longitude']
-    cols.extend(list(map(lambda y: int(y[1:]), df.columns[6:])))
-    df.columns = cols
-    df.rename(columns={'Area Abbreviation': 'CountryCode',
-              'Area': 'Country'}, inplace=True)
-    return df
-
-
-def readData(path):
-    data = pd.read_csv(path)
-    return cleanData(data)
-
-
-# foodData = readData('datasets/pre_food.csv')
+from plots import equipmentPlots
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
@@ -254,7 +237,8 @@ footer = html.Footer([
 
 app.layout = html.Div([
     navbar,
-    home
+    home,
+    equipmentPlots
     # html.Br(),
     # card_img,
     # cards,
@@ -281,4 +265,3 @@ def toggle_navbar_collapse(n, is_open):
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=8888)
-
