@@ -123,7 +123,7 @@ home = html.Div([
         html.Div([
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/milletry.jpeg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
@@ -140,7 +140,7 @@ home = html.Div([
             ], className='shadow'),
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/.jpeg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
