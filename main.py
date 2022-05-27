@@ -106,9 +106,9 @@ card_img = dbc.Container([
         ),
         dbc.CardImgOverlay(
             dbc.CardBody([
-                html.H4("Feed All", className="title"),
+                html.H4("Russia Ukraine War Analysis", className="title"),
                 html.P([
-                    "A Collective dashboard for food production"
+                    "A Collective dashboard for war analysis"
                 ], className="card-text1"),
                 html.P([
                     "over the years"
@@ -130,7 +130,7 @@ home = html.Div([
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            " Equipment Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
@@ -147,7 +147,7 @@ home = html.Div([
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            "Personnel Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
@@ -164,7 +164,7 @@ home = html.Div([
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            "Analysis"
+                            "Timeline Analysis"
                         ], className="font-medium card-title"),
                         html.B([
                             "Travel through various types of graphs and interpretations"
