@@ -64,7 +64,7 @@ navbar = dbc.Navbar([
                 ),
                 dbc.Col(
                     dbc.NavbarBrand([
-                        "Food Production Dashboard"
+                        "Russo Ukraine War"
                     ], className="ms-2 dodgerblue")
                 )
             ], align="center", className="g-0"),
@@ -89,7 +89,7 @@ card_img = dbc.Container([
         ),
         dbc.CardImgOverlay(
             dbc.CardBody([
-                html.H4("Russia Ukraine War", className="title"),
+                html.P("Russia Ukraine War", className="display-3 fw-bold text-muted"),
                 html.P([
                     "A Collective  database for war"
                 ], className="card-text1"),

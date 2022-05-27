@@ -19,6 +19,8 @@ def readData(path="datasets/russia_losses_equipment.csv"):
 df = readData()
 
 equipmentPlots = html.Div([
+    
+html.Div([
     html.Div([
         html.H3('AirCraft Loss'),
         dcc.Graph(
@@ -26,4 +28,85 @@ equipmentPlots = html.Div([
             figure=plotEquipment(df, 'aircraft')
         )
     ], className="card-body")
-], className="card mt-5")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('Tank Loss over Days'),
+        dcc.Graph(
+            id='graph-2',
+            figure=plotEquipment(df, 'tank')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('APC Loss '),
+        dcc.Graph(
+            id='graph-3',
+            figure=plotEquipment(df, 'APC')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('field Artillery Loss'),
+        dcc.Graph(
+            id='graph-4',
+            figure=plotEquipment(df, 'field artillery')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('MRL Loss'),
+        dcc.Graph(
+            id='graph-5',
+            figure=plotEquipment(df, 'MRL')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('military auto Loss'),
+        dcc.Graph(
+            id='graph-6',
+            figure=plotEquipment(df, 'military auto')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('fuel tank Loss'),
+        dcc.Graph(
+            id='graph-7',
+            figure=plotEquipment(df, 'fuel tank')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('drone Loss'),
+        dcc.Graph(
+            id='graph-8',
+            figure=plotEquipment(df, 'drone')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('naval ship Loss'),
+        dcc.Graph(
+            id='graph-9',
+            figure=plotEquipment(df, 'naval ship')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+])
