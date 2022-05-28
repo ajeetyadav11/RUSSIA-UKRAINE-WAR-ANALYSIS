@@ -227,6 +227,8 @@ cards = html.Div([
     ], className="row"),
 ], className="container", style={"margin-top": "5rem"})
 
+<a href="https://www.statista.com/statistics/1293492/ukraine-war-casualties/" rel="nofollow"><img src="https://www.statista.com/graphic/1/1293492/ukraine-war-casualties.jpg" alt="Statistic: Number of civilian casualties in Ukraine during Russia's invasion verified by OHCHR as of May 25, 2022 | Statista" style="width: 100%; height: auto !important; max-width:1000px;-ms-interpolation-mode: bicubic;"/></a><br />Find more statistics at  <a href="https://www.statista.com" rel="nofollow">Statista</a>
+
 footer = html.Footer([
     html.Div([
         html.H5("Copyright")
