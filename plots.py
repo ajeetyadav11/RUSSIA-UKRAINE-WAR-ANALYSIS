@@ -16,7 +16,8 @@ def readData(path="datasets/russia_losses_equipment.csv"):
     return cleanData(data)
 
 
-df = readData()
+df = readData("datasets/russia_losses_equipment (1) (1).csv")
+df2 = readData("datasets/russia_losses_personnel.csv")
 
 equipmentPlots = html.Div([
     
@@ -110,3 +111,28 @@ html.Div([
     ], className="card-body")
 ], className="card mt-5"),
 ])
+
+
+personalPlots = html.Div([
+    
+html.Div([
+    html.Div([
+        html.H3('personnel'),
+        dcc.Graph(
+            id='graph-1',
+            figure=plotEquipment(df2, 'personnel')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+
+html.Div([
+    html.Div([
+        html.H3('POW'),
+        dcc.Graph(
+            id='graph-2',
+            figure=plotEquipment(df2, 'POW')
+        )
+    ], className="card-body")
+], className="card mt-5"),
+)]
+
