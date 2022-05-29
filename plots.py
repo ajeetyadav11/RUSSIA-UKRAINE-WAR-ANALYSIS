@@ -103,7 +103,7 @@ equipmentPlots = html.Div([
 
     html.Div([
         html.Div([
-            html.H3('naval ship Loss', className="text-center"),
+            html.H3('Naval Ship Loss', className="text-center"),
             dcc.Graph(
                 id='graph-9',
                 figure=plotEquipment(df, 'naval ship')
@@ -127,7 +127,7 @@ personalPlots = html.Div([
 
     html.Div([
         html.Div([
-            html.H3('POW', className="text-center"),
+            html.H3('Prisoners Of War', className="text-center"),
             dcc.Graph(
                 id='graph-11',
                 figure=plotEquipment(df2, 'POW')
@@ -161,5 +161,17 @@ events = html.Div([
              html.Img(src="./static/Screenshot2.png"),
              html.Img(src="./static/Screenshot3.png"),
         ], className="card-body")
+    ], className="card mt-5"),
+    html.Div([
+        html.Div([
+            html.H3('Civilians Injured in Ukraine', className="text-center"),
+             html.Img(src="./static/Civilians Injured.png"),
+                     ], className="card-body")
+    ], className="card mt-5"),
+    html.Div([
+        html.Div([
+            html.H3('Civilians Killed in Ukraine', className="text-center"),
+             html.Img(src="./static/Civilians Killed.png"),
+                     ], className="card-body")
     ], className="card mt-5"),
 ])
