@@ -145,6 +145,7 @@ events = html.Div([
             html.Img(src="./static/conflict_map.png"),
         ], className="card-body")
     ], className="card mt-5"),
+    
     html.Div([
         html.Div([
             html.H3('Russian Equipment And Personnel Losses', className="text-center"),
@@ -152,6 +153,7 @@ events = html.Div([
             html.Img(src="./static/Screenshot.png"),
         ], className="card-body")
     ], className="card mt-5"),
+   
    html.Div([
         html.Div([
             html.H3('% Dependency on Russian Gas Exports', className="text-center"),
