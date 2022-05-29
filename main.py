@@ -2,7 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, html, dcc
 import pandas as pd
-from plots import equipmentPlots
+from plots import equipmentPlots, personalPlots, events
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
@@ -238,7 +238,9 @@ footer = html.Footer([
 app.layout = html.Div([
     navbar,
     home,
-    equipmentPlots
+    equipmentPlots,
+    personalPlots,
+    events
     # html.Br(),
     # card_img,
     # cards,
