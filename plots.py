@@ -134,5 +134,5 @@ html.Div([
         )
     ], className="card-body")
 ], className="card mt-5"),
-)]
+])
 
