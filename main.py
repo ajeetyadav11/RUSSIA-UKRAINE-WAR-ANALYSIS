@@ -91,11 +91,9 @@ card_img = dbc.Container([
             dbc.CardBody([
                 html.P("Russia Ukraine War", className="display-3 fw-bold text-muted"),
                 html.P([
-                    "A Collective  database for war"
+                    "Let's stop it"
                 ], className="card-text1"),
-                html.P([
-                    "over the years"
-                ], className="card-text1"),
+                
             ])
         )
     ], className='shadow')
