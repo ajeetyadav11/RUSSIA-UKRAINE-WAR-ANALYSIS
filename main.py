@@ -113,10 +113,7 @@ home = html.Div([
                         html.H4([
                             "Equipments Analysis"
                         ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                        ]),
                 )
             ], className='shadow'),
             dbc.Card([
@@ -130,10 +127,7 @@ home = html.Div([
                         html.H4([
                             "Personnel Analysis"
                         ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                        ]),
                 )
             ], className='shadow'),
             dbc.Card([
@@ -147,10 +141,7 @@ home = html.Div([
                         html.H4([
                             "Timeline Analysis"
                         ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                         ]),
                 )
             ], className='shadow'),
         ], className="col-md-3"),
