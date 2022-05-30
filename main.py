@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, State, html, dcc
 import pandas as pd
 from plots import equipmentPlots, personalPlots, events
+from dash.exceptions import PreventUpdate
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
@@ -138,9 +139,9 @@ home = html.Div([
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
-                        html.H4([
+                        html.Button([
                             "Timeline Analysis"
-                        ], className="font-medium card-title"),
+                        ], className="font-medium card-title", id="event-button"),
                          ]),
                 )
             ], className='shadow'),
@@ -229,7 +230,6 @@ app.layout = html.Div([
     home,
     equipmentPlots,
     personalPlots,
-    events
     # html.Br(),
     # card_img,
     # cards,
@@ -242,6 +242,15 @@ app.layout = html.Div([
     # head
 ], className="pt-5")
 
+@app.callback(
+    Output(component_id='event-div', component_property='children'),
+    Input(component_id='event-button', component_property='n_clicks')
+)
+def update_output(n_clicks):
+    if n_clicks is None:
+        raise PreventUpdate
+    else:
+        return 
 
 @app.callback(
     Output("navbar-collapse", "is_open"),

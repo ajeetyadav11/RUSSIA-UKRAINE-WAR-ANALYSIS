@@ -43,7 +43,7 @@ equipmentPlots = html.Div([
 
     html.Div([
         html.Div([
-            html.H3('APC Loss', className="text-center"),
+            html.H3('Armoured Personnel Carrier Loss', className="text-center"),
             dcc.Graph(
                 id='graph-3',
                 figure=plotEquipment(df, 'APC')
