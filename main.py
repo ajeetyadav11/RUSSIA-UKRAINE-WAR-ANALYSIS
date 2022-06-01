@@ -90,11 +90,12 @@ card_img = dbc.Container([
         ),
         dbc.CardImgOverlay(
             dbc.CardBody([
-                html.P("Russia Ukraine War", className="display-3 fw-bold text-muted"),
+                html.P("Russia Ukraine War",
+                       className="display-3 fw-bold text-muted"),
                 html.P([
                     "Let's stop it"
                 ], className="card-text1"),
-                
+
             ])
         )
     ], className='shadow')
@@ -111,10 +112,10 @@ home = html.Div([
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
-                        html.H4([
-                            "Equipments Analysis"
-                        ], className="font-medium card-title"),
-                        ]),
+                        html.Button([
+                            "Equipment Loss Analysis"
+                        ], className="btn btn-primary w-100", id="equipment-button"),
+                    ]),
                 )
             ], className='shadow'),
             dbc.Card([
@@ -125,10 +126,10 @@ home = html.Div([
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
-                        html.H4([
-                            "Personnel Analysis"
-                        ], className="font-medium card-title"),
-                        ]),
+                        html.Button([
+                            "Personal Loss Analysis"
+                        ], className="btn btn-primary w-100", id="personal-button"),
+                    ]),
                 )
             ], className='shadow'),
             dbc.Card([
@@ -141,8 +142,8 @@ home = html.Div([
                     dbc.CardBody([
                         html.Button([
                             "Timeline Analysis"
-                        ], className="font-medium card-title", id="event-button"),
-                         ]),
+                        ], className="btn btn-primary card-title w-100", id="timeline-button"),
+                    ]),
                 )
             ], className='shadow'),
         ], className="col-md-3"),
@@ -228,8 +229,9 @@ footer = html.Footer([
 app.layout = html.Div([
     navbar,
     home,
-    equipmentPlots,
-    personalPlots,
+    html.Div(id="equipment-div"),
+    html.Div(id="personal-div"),
+    html.Div(id="timeline-div"),
     # html.Br(),
     # card_img,
     # cards,
@@ -242,15 +244,39 @@ app.layout = html.Div([
     # head
 ], className="pt-5")
 
+
 @app.callback(
-    Output(component_id='event-div', component_property='children'),
-    Input(component_id='event-button', component_property='n_clicks')
+    Output(component_id='equipment-div', component_property='children'),
+    Input(component_id='equipment-button', component_property='n_clicks')
 )
 def update_output(n_clicks):
     if n_clicks is None:
         raise PreventUpdate
     else:
-        return 
+        return equipmentPlots
+
+
+@app.callback(
+    Output(component_id='personal-div', component_property='children'),
+    Input(component_id='personal-button', component_property='n_clicks')
+)
+def update_output(n_clicks):
+    if n_clicks is None:
+        raise PreventUpdate
+    else:
+        return personalPlots
+
+
+@app.callback(
+    Output(component_id='timeline-div', component_property='children'),
+    Input(component_id='timeline-button', component_property='n_clicks')
+)
+def update_output(n_clicks):
+    if n_clicks is None:
+        raise PreventUpdate
+    else:
+        return events
+
 
 @app.callback(
     Output("navbar-collapse", "is_open"),
