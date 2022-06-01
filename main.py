@@ -2,7 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, html, dcc
 import pandas as pd
-from plots import equipmentPlots
+from plots import equipmentPlots, personalPlots, events
+from dash.exceptions import PreventUpdate
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
@@ -64,7 +65,7 @@ navbar = dbc.Navbar([
                 ),
                 dbc.Col(
                     dbc.NavbarBrand([
-                        "Food Production Dashboard"
+                        "Russo Ukraine War"
                     ], className="ms-2 dodgerblue")
                 )
             ], align="center", className="g-0"),
@@ -83,19 +84,17 @@ navbar = dbc.Navbar([
 card_img = dbc.Container([
     dbc.Card([
         dbc.CardImg(
-            src="/static/images/ooter.jpg",
+            src="/static/images/front pages.webp",
             top=True,
             style={"opacity": 0.2},
         ),
         dbc.CardImgOverlay(
             dbc.CardBody([
-                html.H4("Russia Ukraine War Analysis", className="title"),
+                html.P("Russia Ukraine War", className="display-3 fw-bold text-muted"),
                 html.P([
-                    "A Collective dashboard for war analysis"
+                    "Let's stop it"
                 ], className="card-text1"),
-                html.P([
-                    "over the years"
-                ], className="card-text1"),
+                
             ])
         )
     ], className='shadow')
@@ -106,24 +105,21 @@ home = html.Div([
         html.Div([
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/milletry.jpeg",
+                    src="/static/images/equpment.jpeg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
                         html.H4([
-                            " Equipment Analysis"
+                            "Equipments Analysis"
                         ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                        ]),
                 )
             ], className='shadow'),
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/.jpeg",
+                    src="/static/images/personal.webp",
                     top=True,
                     style={"opacity": 0.3},
                 ),
@@ -132,27 +128,21 @@ home = html.Div([
                         html.H4([
                             "Personnel Analysis"
                         ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                        ]),
                 )
             ], className='shadow'),
             dbc.Card([
                 dbc.CardImg(
-                    src="/static/images/analysis.jpg",
+                    src="/static/images/timeline.jpg",
                     top=True,
                     style={"opacity": 0.3},
                 ),
                 dbc.CardImgOverlay(
                     dbc.CardBody([
-                        html.H4([
+                        html.Button([
                             "Timeline Analysis"
-                        ], className="font-medium card-title"),
-                        html.B([
-                            "Travel through various types of graphs and interpretations"
-                        ], className="card-text"),
-                    ]),
+                        ], className="font-medium card-title", id="event-button"),
+                         ]),
                 )
             ], className='shadow'),
         ], className="col-md-3"),
@@ -238,7 +228,8 @@ footer = html.Footer([
 app.layout = html.Div([
     navbar,
     home,
-    equipmentPlots
+    equipmentPlots,
+    personalPlots,
     # html.Br(),
     # card_img,
     # cards,
@@ -251,6 +242,15 @@ app.layout = html.Div([
     # head
 ], className="pt-5")
 
+@app.callback(
+    Output(component_id='event-div', component_property='children'),
+    Input(component_id='event-button', component_property='n_clicks')
+)
+def update_output(n_clicks):
+    if n_clicks is None:
+        raise PreventUpdate
+    else:
+        return 
 
 @app.callback(
     Output("navbar-collapse", "is_open"),
