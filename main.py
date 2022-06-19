@@ -232,18 +232,18 @@ app.layout = html.Div([
     html.Div(id="equipment-div"),
     html.Div(id="personal-div"),
     html.Div(id="timeline-div"),
-    # html.Br(),
-    # card_img,
-    # cards,
-    # html.Br(),
-    # btn,
-    # footer,
-    # html.Br(),
-    # card,
-    # html.Br(),
-    # head
 ], className="pt-5")
 
+@app.callback(
+    Output("page-content", "children"),
+    Input("url", "pathname")
+)
+
+def pages(pathname):
+    if pathname == '/':
+        return index
+    elif pathname == '/datasets':
+        return dataset
 
 @app.callback(
     Output(component_id='equipment-div', component_property='children'),
