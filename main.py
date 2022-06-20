@@ -104,7 +104,8 @@ card_img = dbc.Container([
 home = html.Div([
     html.Div([
         html.Div([
-            dbc.Card([
+            html.A([
+                dbc.Card([
                 dbc.CardImg(
                     src="/static/images/equpment.jpeg",
                     top=True,
@@ -118,7 +119,10 @@ home = html.Div([
                     ]),
                 )
             ], className='shadow'),
-            dbc.Card([
+            ], href="/datasets",className='nav')
+            ,
+            html.A([
+                dbc.Card([
                 dbc.CardImg(
                     src="/static/images/personal.webp",
                     top=True,
@@ -132,7 +136,9 @@ home = html.Div([
                     ]),
                 )
             ], className='shadow'),
-            dbc.Card([
+            ] ,href="/datasets",className='nav'),
+            html.A([
+                dbc.Card([
                 dbc.CardImg(
                     src="/static/images/timeline.jpg",
                     top=True,
@@ -146,6 +152,8 @@ home = html.Div([
                     ]),
                 )
             ], className='shadow'),
+            ], href="/datasets",className='nav'),
+            
         ], className="col-md-3"),
         html.Div([
             card_img
@@ -226,13 +234,10 @@ footer = html.Footer([
     style={"background-color": "white", "color": "dodgerblue"},
 )
 
-app.layout = html.Div([
-    navbar,
-    home,
-    html.Div(id="equipment-div"),
-    html.Div(id="personal-div"),
-    html.Div(id="timeline-div"),
-], className="pt-5")
+index = [home, cards]
+
+app.layout = html.Div([dcc.Location(id="url", refresh=False),navbar,  
+html.Div([], id="page-content", className="pt-5")])
 
 @app.callback(
     Output("page-content", "children"),
@@ -243,39 +248,8 @@ def pages(pathname):
     if pathname == '/':
         return index
     elif pathname == '/datasets':
-        return dataset
+        return None
 
-@app.callback(
-    Output(component_id='equipment-div', component_property='children'),
-    Input(component_id='equipment-button', component_property='n_clicks')
-)
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
-        return equipmentPlots
-
-
-@app.callback(
-    Output(component_id='personal-div', component_property='children'),
-    Input(component_id='personal-button', component_property='n_clicks')
-)
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
-        return personalPlots
-
-
-@app.callback(
-    Output(component_id='timeline-div', component_property='children'),
-    Input(component_id='timeline-button', component_property='n_clicks')
-)
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
-        return events
 
 
 @app.callback(
