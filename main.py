@@ -74,7 +74,7 @@ navbar = dbc.Navbar([
             id="navbar-toggler",
             n_clicks=0),
         dbc.Collapse(
-            search_bar,
+            # search_bar,
             id="navbar-collapse",
             is_open=False,
             navbar=True)
@@ -101,66 +101,61 @@ card_img = dbc.Container([
     ], className='shadow')
 ], className="pt-5")
 
-home = html.Div([
-    html.Div([
-        html.Div([
-            html.A([
-                dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/equpment.jpeg",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Equipment Loss Analysis"
-                        ], className="btn btn-primary w-100", id="equipment-button"),
-                    ]),
-                )
-            ], className='shadow'),
-            ], href="/datasets",className='nav')
-            ,
-            html.A([
-                dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/personal.webp",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Personal Loss Analysis"
-                        ], className="btn btn-primary w-100", id="personal-button"),
-                    ]),
-                )
-            ], className='shadow'),
-            ] ,href="/datasets",className='nav'),
-            html.A([
-                dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/timeline.jpg",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Timeline Analysis"
-                        ], className="btn btn-primary card-title w-100", id="timeline-button"),
-                    ]),
-                )
-            ], className='shadow'),
-            ], href="/datasets",className='nav'),
-            
-        ], className="col-md-3"),
-        html.Div([
-            card_img
-        ], className="col-md-9"),
-    ], className="row")
+# home = html.Div([
+#     html.Div([
+#         html.Div([
 
-], className="container-fluid mt-5")
+#         ], className="col-md-3"),
+#         html.Div([
+
+#         ], className="col-md-9"),
+#     ], className="row")
+
+# ])
+
+home_tags = [card_img]
+cardDetails = [
+    {
+        'image': '/static/images/equpment.jpeg',
+        'title': 'Equipment Loss Anlysis',
+        'para': 'View complete Analysis of Loss of Equipments in the War',
+        'link': '/equipmentloss'
+    },
+    {
+        'image': '/static/images/personal.webp',
+        'title': 'Personal Loss Anlysis',
+        'para': 'View complete Analysis of Loss of Militry Personal in the War',
+        'link': '/personalloss'
+    },
+    {
+        'image': '/static/images/timeline.jpg',
+        'title': 'War Timline Anlysis',
+        'para': 'Timeline of events in the War till Date',
+        'link': '/timeline'
+    },
+]
+
+for detail in cardDetails:
+    home_tags.append(
+        html.A(
+                dbc.Card([
+                    dbc.CardImg(
+                        src=detail.get('image'),
+                        top=True,
+                        style={"opacity": 0.7},
+                    ),
+                    dbc.CardBody([
+                        html.H3(
+                            detail.get('title')
+                        ),
+                        html.H6(
+                            detail.get('para')
+                        ),
+                    ]),
+                ], className='shadow mt-5')
+                , href=detail.get('link'))
+    )
+
 
 cards = html.Div([
     html.Div([
@@ -234,22 +229,27 @@ footer = html.Footer([
     style={"background-color": "white", "color": "dodgerblue"},
 )
 
-index = [home, cards]
+index = [html.Div(home_tags, className='container'), cards]
 
-app.layout = html.Div([dcc.Location(id="url", refresh=False),navbar,  
-html.Div([], id="page-content", className="pt-5")])
+app.layout = html.Div([dcc.Location(id="url", refresh=False), navbar,
+                       html.Div([], id="page-content", className="pt-5")])
+
 
 @app.callback(
     Output("page-content", "children"),
     Input("url", "pathname")
 )
-
 def pages(pathname):
     if pathname == '/':
         return index
     elif pathname == '/datasets':
         return None
-
+    elif pathname == '/equipmentloss':
+        return equipmentPlots
+    elif pathname == '/personalloss':
+        return personalPlots
+    elif pathname == '/timline':
+        return events
 
 
 @app.callback(
