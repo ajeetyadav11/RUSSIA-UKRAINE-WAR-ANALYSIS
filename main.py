@@ -7,7 +7,7 @@ from dash.exceptions import PreventUpdate
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
-
+server = app.server
 PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
 
 # def createCard(img, bodyChildren):
@@ -248,7 +248,7 @@ def pages(pathname):
         return equipmentPlots
     elif pathname == '/personalloss':
         return personalPlots
-    elif pathname == '/timline':
+    elif pathname == '/timeline':
         return events
 
 
