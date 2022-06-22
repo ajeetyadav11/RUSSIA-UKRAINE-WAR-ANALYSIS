@@ -7,7 +7,7 @@ from dash.exceptions import PreventUpdate
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.BOOTSTRAP, 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css'])
-
+server = app.server
 PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
 
 # def createCard(img, bodyChildren):
@@ -74,7 +74,7 @@ navbar = dbc.Navbar([
             id="navbar-toggler",
             n_clicks=0),
         dbc.Collapse(
-            search_bar,
+            # search_bar,
             id="navbar-collapse",
             is_open=False,
             navbar=True)
@@ -101,58 +101,61 @@ card_img = dbc.Container([
     ], className='shadow')
 ], className="pt-5")
 
-home = html.Div([
-    html.Div([
-        html.Div([
-            dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/equpment.jpeg",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Equipment Loss Analysis"
-                        ], className="btn btn-primary w-100", id="equipment-button"),
-                    ]),
-                )
-            ], className='shadow'),
-            dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/personal.webp",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Personal Loss Analysis"
-                        ], className="btn btn-primary w-100", id="personal-button"),
-                    ]),
-                )
-            ], className='shadow'),
-            dbc.Card([
-                dbc.CardImg(
-                    src="/static/images/timeline.jpg",
-                    top=True,
-                    style={"opacity": 0.3},
-                ),
-                dbc.CardImgOverlay(
-                    dbc.CardBody([
-                        html.Button([
-                            "Timeline Analysis"
-                        ], className="btn btn-primary card-title w-100", id="timeline-button"),
-                    ]),
-                )
-            ], className='shadow'),
-        ], className="col-md-3"),
-        html.Div([
-            card_img
-        ], className="col-md-9"),
-    ], className="row")
+# home = html.Div([
+#     html.Div([
+#         html.Div([
 
-], className="container-fluid mt-5")
+#         ], className="col-md-3"),
+#         html.Div([
+
+#         ], className="col-md-9"),
+#     ], className="row")
+
+# ])
+
+home_tags = [card_img]
+cardDetails = [
+    {
+        'image': '/static/images/equpment.jpeg',
+        'title': 'Equipment Loss Anlysis',
+        'para': 'View complete Analysis of Loss of Equipments in the War',
+        'link': '/equipmentloss'
+    },
+    {
+        'image': '/static/images/personal.webp',
+        'title': 'Personal Loss Anlysis',
+        'para': 'View complete Analysis of Loss of Militry Personal in the War',
+        'link': '/personalloss'
+    },
+    {
+        'image': '/static/images/timeline.jpg',
+        'title': 'War Timline Anlysis',
+        'para': 'Timeline of events in the War till Date',
+        'link': '/timeline'
+    },
+]
+
+for detail in cardDetails:
+    home_tags.append(
+        html.A(
+                dbc.Card([
+                    dbc.CardImg(
+                        src=detail.get('image'),
+                        top=True,
+                        style={"opacity": 0.7},
+                    ),
+                    dbc.CardBody([
+                        html.H3(
+                            detail.get('title')
+                        ),
+                        html.H6(
+                            detail.get('para')
+                        ),
+                    ]),
+                ], className='shadow mt-5')
+                , href=detail.get('link'))
+    )
+
 
 cards = html.Div([
     html.Div([
@@ -226,55 +229,26 @@ footer = html.Footer([
     style={"background-color": "white", "color": "dodgerblue"},
 )
 
-app.layout = html.Div([
-    navbar,
-    home,
-    html.Div(id="equipment-div"),
-    html.Div(id="personal-div"),
-    html.Div(id="timeline-div"),
-    # html.Br(),
-    # card_img,
-    # cards,
-    # html.Br(),
-    # btn,
-    # footer,
-    # html.Br(),
-    # card,
-    # html.Br(),
-    # head
-], className="pt-5")
+index = [html.Div(home_tags, className='container'), cards]
+
+app.layout = html.Div([dcc.Location(id="url", refresh=False), navbar,
+                       html.Div([], id="page-content", className="pt-5")])
 
 
 @app.callback(
-    Output(component_id='equipment-div', component_property='children'),
-    Input(component_id='equipment-button', component_property='n_clicks')
+    Output("page-content", "children"),
+    Input("url", "pathname")
 )
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
+def pages(pathname):
+    if pathname == '/':
+        return index
+    elif pathname == '/datasets':
+        return None
+    elif pathname == '/equipmentloss':
         return equipmentPlots
-
-
-@app.callback(
-    Output(component_id='personal-div', component_property='children'),
-    Input(component_id='personal-button', component_property='n_clicks')
-)
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
+    elif pathname == '/personalloss':
         return personalPlots
-
-
-@app.callback(
-    Output(component_id='timeline-div', component_property='children'),
-    Input(component_id='timeline-button', component_property='n_clicks')
-)
-def update_output(n_clicks):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
+    elif pathname == '/timeline':
         return events
 
 
